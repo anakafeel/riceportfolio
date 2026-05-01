@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>niri-dots · newport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="subpage.css">
+</head>
+<body class="subpage">
+
+<div class="bg-stage">
+  <div class="bg-grid sp-grid"></div>
+  <div class="bg-blob cy sp-blob-cy"></div>
+  <div class="bg-blob mg sp-blob-mg"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-noise"></div>
+</div>
+
+<header class="sp-topbar">
+  <a href="Saim-Rice Portfolio.html" class="sp-back">
+    <span class="icn">←</span>
+    <span>~/projects</span>
+  </a>
+  <div class="sp-breadcrumb">
+    <span>saim@niriarch</span>
+    <span class="sep">:</span>
+    <span>~/projects</span>
+    <span class="sep">/</span>
+    <span class="active">niri-dots</span>
+  </div>
+  <div class="sp-meta"><span class="dot"></span>active · v2.4.1</div>
+</header>
+
+<main class="project-wrap">
+  <section class="project-hero">
+    <div class="ph-left">
+      <div class="ph-eyebrow">03 · projects / niri-dots</div>
+      <h1 class="ph-title">Niri <em>Dotfiles</em>.</h1>
+      <p class="ph-dek">
+        A scrollable-tiling window manager config with dynamic keybinds, floating
+        overlay rules, and a Matugen-reactive theme pipeline. Daily-driven on
+        Fedora 42.
+      </p>
+
+      <div class="ph-meta">
+        <div><span class="k">status</span><span class="v status-on">● shipping</span></div>
+        <div><span class="k">version</span><span class="v">2.4.1</span></div>
+        <div><span class="k">license</span><span class="v">MIT</span></div>
+        <div><span class="k">stars</span><span class="v">1,842 ↗</span></div>
+      </div>
+
+      <div class="ph-links">
+        <a href="#" class="btn primary">⌘ clone repo</a>
+        <a href="#" class="btn">↗ live demo</a>
+        <a href="#" class="btn">↗ docs</a>
+      </div>
+    </div>
+
+    <div class="ph-right">
+      <div class="ph-screenshot">
+        <div class="ss-chrome">
+          <div class="tl"><span></span><span></span><span></span></div>
+          <div class="ss-title">niri · workspace-1</div>
+          <div class="ss-tag">~/.config/niri</div>
+        </div>
+        <div class="ss-body">
+          <div class="ss-col">
+            <div class="ss-bar"><span></span><span class="w40"></span><span class="w60"></span></div>
+            <div class="ss-bar"><span class="w80"></span></div>
+            <div class="ss-bar"><span class="w40"></span><span class="w30"></span></div>
+            <div class="ss-block" style="height:80px"></div>
+          </div>
+          <div class="ss-col active">
+            <div class="ss-bar"><span class="w60"></span></div>
+            <div class="ss-bar"><span class="w30"></span><span class="w40"></span></div>
+            <div class="ss-bar"><span class="w80"></span></div>
+            <div class="ss-block" style="height:110px"></div>
+            <div class="ss-bar"><span class="w40"></span></div>
+          </div>
+          <div class="ss-col">
+            <div class="ss-bar"><span class="w30"></span></div>
+            <div class="ss-bar"><span class="w60"></span><span class="w20"></span></div>
+            <div class="ss-block" style="height:60px"></div>
+          </div>
+        </div>
+        <div class="ss-overlay">04 placeholder · drop real screenshot</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-body">
+    <div class="pb-main">
+      <div class="pb-section">
+        <h3 class="pb-h">// overview</h3>
+        <p>Niri is a scrollable-tiling Wayland compositor that lays windows out in an infinite horizontal strip. This dotfile repo packages a ready-to-run configuration plus the supporting services — DankMaterialShell bar, Matugen theming pipeline, anyrun launcher, and a focused keybind map optimized for HHKB layouts.</p>
+        <p>The key decision was making every visible piece of chrome — the bar, the notifications, the rofi menus — reactive to the wallpaper's extracted palette. Change the wallpaper; the whole system re-tints in ~120ms.</p>
+      </div>
+
+      <div class="pb-section">
+        <h3 class="pb-h">// features</h3>
+        <ul class="feat">
+          <li><b>scrollable strip</b> — native niri layout, no overrides. Windows live in a single infinite row.</li>
+          <li><b>matugen theming</b> — wallpaper → oklch palette → CSS / kdl / toml, all regenerated on change.</li>
+          <li><b>floating overlays</b> — specific window classes (picker, calculator, claude) auto-float with rules.</li>
+          <li><b>agentic keybinds</b> — <kbd>Super</kbd>+<kbd>a</kbd> opens a Claude Code session scoped to the focused project.</li>
+          <li><b>zero systemd shims</b> — everything lives under <span class="mono"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abc5c2d9c286d8ced8d8c2c4c5eb85dfcad9cccedf">[email&#160;protected]</a></span>, no hacks.</li>
+        </ul>
+      </div>
+
+      <div class="pb-section">
+        <h3 class="pb-h">// config excerpt</h3>
+        <pre class="code"><span class="cc"># ~/.config/niri/config.kdl — keybinds</span>
+<span class="ck">binds</span> {
+  <span class="cf">Mod+Return</span> { spawn <span class="cs">"alacritty"</span>; }
+  <span class="cf">Mod+a</span>      { spawn <span class="cs">"claude-code"</span> <span class="cs">"--project"</span> <span class="cs">"$PWD"</span>; }
+  <span class="cf">Mod+h</span>      { focus-column-left; }
+  <span class="cf">Mod+l</span>      { focus-column-right; }
+  <span class="cf">Mod+Shift+h</span>{ move-column-left; }
+  <span class="cf">Mod+Shift+l</span>{ move-column-right; }
+}</pre>
+      </div>
+
+      <div class="pb-section">
+        <h3 class="pb-h">// tech stack</h3>
+        <div class="chips">
+          <span>niri 0.1.10</span>
+          <span>kdl</span>
+          <span>wayland</span>
+          <span>quickshell</span>
+          <span>qml</span>
+          <span>matugen</span>
+          <span>fish</span>
+          <span>alacritty</span>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <h3 class="pb-h">// changelog</h3>
+        <ul class="changelog">
+          <li><span class="v">v2.4.1</span><span class="d">2026.04.02</span> Matugen cache → tmpfs. 40% faster re-theming.</li>
+          <li><span class="v">v2.4.0</span><span class="d">2026.03.20</span> Added agentic keybinds for Claude Code.</li>
+          <li><span class="v">v2.3.0</span><span class="d">2026.02.15</span> Rewrote bar in quickshell. RIP waybar, gone too soon.</li>
+          <li><span class="v">v2.2.0</span><span class="d">2026.01.28</span> Floating overlay rules for picker, calc, notes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="pb-side">
+      <div class="side-card">
+        <div class="sc-hd">// metrics</div>
+        <div class="sc-row"><span>contributors</span><span class="v">14</span></div>
+        <div class="sc-row"><span>issues open</span><span class="v">3</span></div>
+        <div class="sc-row"><span>last commit</span><span class="v">2h ago</span></div>
+        <div class="sc-row"><span>loc</span><span class="v">1,248</span></div>
+      </div>
+
+      <div class="side-card">
+        <div class="sc-hd">// install</div>
+        <pre class="mini-code">$ git clone gh:anakafeel/niri-dots
+$ cd niri-dots && ./install.sh
+$ niri-session</pre>
+      </div>
+
+      <div class="side-card">
+        <div class="sc-hd">// other rices</div>
+        <a href="project-detail.html" class="sc-link">
+          <span class="k">dank-shell</span>
+          <span class="v">→</span>
+        </a>
+        <a href="project-detail.html" class="sc-link">
+          <span class="k">astronvim</span>
+          <span class="v">→</span>
+        </a>
+        <a href="project-detail.html" class="sc-link">
+          <span class="k">matugen-web</span>
+          <span class="v">→</span>
+        </a>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<nav class="post-next">
+  <a href="project-detail.html" class="prev">
+    <span class="dir">← previous project</span>
+    <span class="t">matugen-web</span>
+  </a>
+  <a href="Saim-Rice Portfolio.html" class="home">⌂ workspace</a>
+  <a href="project-detail.html" class="next">
+    <span class="dir">next project →</span>
+    <span class="t">dank-shell</span>
+  </a>
+</nav>
+
+<footer class="sp-footer">
+  <span>© 2026 saim hashmi</span>
+  <span class="sep">·</span>
+  <span>a rice is a love language</span>
+  <span class="sep">·</span>
+  <span><kbd>H</kbd> home</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.addEventListener("keydown", (e) => {
+  if (e.key === "h" || e.key === "H" || e.key === "Escape") {
+    window.location.href = "Saim-Rice Portfolio.html";
+  }
+});
+</script>
+
+</body>
+</html>

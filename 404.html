@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · newport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="subpage.css">
+</head>
+<body class="subpage">
+
+<div class="bg-stage">
+  <div class="bg-grid sp-grid"></div>
+  <div class="bg-blob cy sp-blob-cy"></div>
+  <div class="bg-blob mg sp-blob-mg"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-noise"></div>
+</div>
+
+<header class="sp-topbar">
+  <a href="Saim-Rice Portfolio.html" class="sp-back">
+    <span class="icn">←</span>
+    <span>~/</span>
+  </a>
+  <div class="sp-breadcrumb">
+    <span>saim@niriarch</span>
+    <span class="sep">:</span>
+    <span class="active" style="color:#ff5f6e">~/???</span>
+  </div>
+  <div class="sp-meta" style="color:#ff5f6e"><span class="dot" style="background:#ff5f6e;box-shadow:0 0 10px #ff5f6e"></span>route not found</div>
+</header>
+
+<main class="nf-wrap">
+  <div class="nf-inner">
+    <div class="nf-tag">signal 11 · SIGSEGV</div>
+    <h1 class="nf-code">404</h1>
+    <h2 class="nf-h">this column does not exist.</h2>
+    <p class="nf-p">
+      The workspace you tried to focus is not mapped. It may have been renamed,
+      moved to another branch, or it was never real to begin with.
+    </p>
+
+    <div class="nf-term">
+      <div><span class="p">saim@niriarch</span><span class="c">:</span><span class="h">~</span><span class="p"> λ </span><span class="c">niri-focus /requested/path</span></div>
+      <div><span class="e">error:</span> <span class="c">no matching column in workspace strip</span></div>
+      <div><span class="e">hint:</span> <span class="c">try</span> <span class="p">help</span><span class="c">,</span> <span class="p">ls</span><span class="c">, or</span> <span class="p">reveal</span></div>
+      <div><span class="p">saim@niriarch</span><span class="c">:</span><span class="h">~</span><span class="p"> λ </span><span style="border-right:2px solid var(--accent-primary);animation:blink 1s step-end infinite">_</span></div>
+    </div>
+
+    <div class="nf-actions">
+      <a href="Saim-Rice Portfolio.html" class="btn primary">⌂ back to workspace</a>
+      <a href="blog-post.html" class="btn">~/blog</a>
+      <a href="project-detail.html" class="btn">~/projects</a>
+    </div>
+  </div>
+</main>
+
+<footer class="sp-footer">
+  <span>© 2026 saim hashmi</span>
+  <span class="sep">·</span>
+  <span>segfault is a feature</span>
+  <span class="sep">·</span>
+  <span><kbd>H</kbd> home</span>
+</footer>
+
+<style>@keyframes blink { 50% { opacity: 0; } }</style>
+<script>
+document.addEventListener("keydown", (e) => {
+  if (e.key === "h" || e.key === "H" || e.key === "Escape") {
+    window.location.href = "Saim-Rice Portfolio.html";
+  }
+});
+</script>
+
+</body>
+</html>
