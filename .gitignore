@@ -40,13 +40,20 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# claude / agents / gsd
-CLAUDE.md
-AGENTS.md
-.claude/
-.gsd/
+# claude / agents / gsd / tools
+.agents/
 .artifacts/
 .bg-shell/
+.claude/
+.gsd/
+.windsurf/
+CLAUDE.md
+AGENTS.md
 design_file
 design_content
 legacy/
+skills/
+skills-lock.json
+
+# raw assets
+assets/
