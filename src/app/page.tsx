@@ -156,6 +156,8 @@ export default function PortfolioPage() {
   const contactIntroRef = useRef<HTMLDivElement>(null);
   const contactFormRef = useRef<HTMLFormElement>(null);
 
+  const [wipeState, setWipeState] = useState<{ active: boolean; nextTheme: "dark" | "light" } | null>(null);
+
   useEffect(() => {
     const saved = localStorage.getItem("sr:phase");
     if (saved === "terminal" || saved === "revealed") {
@@ -172,9 +174,10 @@ export default function PortfolioPage() {
   }, []);
 
   const toggleTheme = useCallback(() => {
+    if (document.documentElement.classList.contains("theme-transitioning")) return;
+    
     const next = theme === "dark" ? "light" : "dark";
     
-    // Theme wipe effect
     const btn = themeToggleRef.current;
     const rect = btn?.getBoundingClientRect();
     const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
@@ -184,22 +187,23 @@ export default function PortfolioPage() {
     document.documentElement.style.setProperty("--wipe-y", `${y}px`);
     document.documentElement.classList.add("theme-transitioning");
 
-    const wipe = document.createElement("div");
-    wipe.className = "theme-wipe";
-    document.body.appendChild(wipe);
+    setWipeState({ active: false, nextTheme: next });
     
     requestAnimationFrame(() => {
-      wipe.classList.add("active");
-      setTimeout(() => {
-        setTheme(next);
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("newport-theme", next);
-      }, 300);
-      
-      setTimeout(() => {
-        document.documentElement.classList.remove("theme-transitioning");
-        wipe.remove();
-      }, 650);
+      requestAnimationFrame(() => {
+        setWipeState({ active: true, nextTheme: next });
+        
+        setTimeout(() => {
+          setTheme(next);
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("newport-theme", next);
+        }, 300);
+        
+        setTimeout(() => {
+          document.documentElement.classList.remove("theme-transitioning");
+          setWipeState(null);
+        }, 650);
+      });
     });
   }, [theme]);
 
@@ -511,6 +515,12 @@ export default function PortfolioPage() {
 
   return (
     <>
+      {wipeState && (
+        <div 
+          className={`theme-wipe ${wipeState.active ? "active" : ""}`} 
+          style={{ background: wipeState.nextTheme === "light" ? "#F4F4F4" : "#07060E" }}
+        />
+      )}
       <div className="bg-stage">
         <div className="bg-grid" />
         <div className="bg-scan" />
