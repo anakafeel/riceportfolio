@@ -268,19 +268,14 @@ html.theme-transitioning * {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  opacity: 0; /* Hidden by default for scroll reveal */
+  opacity: 0; /* Managed by GSAP */
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.column.revealed {
-  opacity: 1;
-  transform: translateY(0);
+  will-change: opacity, transform;
 }
 
 .column[data-idx="0"] { 
   padding-left: 8vw;
-  opacity: 1; /* Home column always visible */
+  opacity: 1; 
   transform: translateY(0);
 }
 
