@@ -238,13 +238,20 @@ export default function PortfolioPage() {
       const isMobile = window.innerWidth <= 768;
 
       if (isMobile) {
-        // Mobile: Vertical reveal using IntersectionObserver pattern
+        // Mobile: Vertical reveal
         sections.forEach((section, i) => {
-          ScrollTrigger.create({
-            trigger: section,
-            start: "top 85%",
-            onEnter: () => section.classList.add("revealed"),
-            once: true
+          if (i === 0) return; // Home always visible
+          gsap.fromTo(section, { opacity: 0, y: 30 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true
+            }
           });
         });
 
@@ -310,31 +317,33 @@ export default function PortfolioPage() {
         });
 
         const tl = gsap.timeline();
+        // Reveal the section itself
+        tl.to(sections[1], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+        
         aboutPanels.forEach((panel, i) => {
-          tl.to(panel, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "elastic.out(1, 0.7)" }, i)
+          tl.to(panel, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "elastic.out(1, 0.7)" }, i + 0.1)
             .call(() => { 
               if (aboutSteps) aboutSteps.forEach((s, j) => s.classList.toggle("bg-[#FF2AB8]", j <= i)); 
               if (aboutSteps) aboutSteps.forEach((s, j) => s.classList.toggle("shadow-[0_0_12px_#FF2AB8]", j <= i)); 
-            }, undefined, i + 0.3)
-            .to(panel, { y: -50, opacity: 0.18, scale: 0.9, duration: 0.7, ease: "power2.in" }, i + 0.95);
+            }, undefined, i + 0.4)
+            .to(panel, { y: -50, opacity: 0.18, scale: 0.9, duration: 0.7, ease: "power2.in" }, i + 1.05);
         });
 
         if (!isMobile) {
           ScrollTrigger.create({
             trigger: sections[1], // About column
             containerAnimation: horizTween,
-            start: "left center",
+            start: "left 90%",
             end: "right 20%",
-            scrub: 0.5,
-            animation: tl,
-            onEnter: () => sections[1].classList.add("revealed")
+            scrub: 1,
+            animation: tl
           });
         } else {
           ScrollTrigger.create({
             trigger: sections[1],
             start: "top center",
             end: "bottom center",
-            scrub: 0.5,
+            scrub: 1,
             animation: tl
           });
         }
@@ -345,16 +354,16 @@ export default function PortfolioPage() {
       if (cards?.length) {
         Array.from(cards).forEach((c) => gsap.set(c, { opacity: 0, rotationY: 45, transformPerspective: 800, transformOrigin: "50% 50%" }));
         const tl = gsap.timeline();
-        Array.from(cards).forEach((c, i) => tl.to(c, { opacity: 1, rotationY: 0, duration: 1, ease: "expo.out" }, i * 0.12));
+        tl.to(sections[2], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+        Array.from(cards).forEach((c, i) => tl.to(c, { opacity: 1, rotationY: 0, duration: 1, ease: "expo.out" }, i * 0.12 + 0.1));
         
         ScrollTrigger.create({
           trigger: sections[2],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left center" : "top 80%",
+          start: !isMobile ? "left 90%" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
-          animation: tl,
-          onEnter: () => sections[2].classList.add("revealed")
+          animation: tl
         });
       }
 
@@ -363,16 +372,16 @@ export default function PortfolioPage() {
       if (rows?.length) {
         Array.from(rows).forEach((r) => gsap.set(r, { opacity: 0, x: 40 }));
         const tl = gsap.timeline();
-        Array.from(rows).forEach((r, i) => tl.to(r, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, i * 0.18));
+        tl.to(sections[3], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+        Array.from(rows).forEach((r, i) => tl.to(r, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, i * 0.18 + 0.1));
         
         ScrollTrigger.create({
           trigger: sections[3],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left center" : "top 80%",
+          start: !isMobile ? "left 90%" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
-          animation: tl,
-          onEnter: () => sections[3].classList.add("revealed")
+          animation: tl
         });
       }
 
@@ -381,16 +390,16 @@ export default function PortfolioPage() {
       if (blocks?.length) {
         Array.from(blocks).forEach((b) => gsap.set(b, { opacity: 0, y: 60 }));
         const tl = gsap.timeline();
-        Array.from(blocks).forEach((b, i) => tl.to(b, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, i * 0.15));
+        tl.to(sections[4], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+        Array.from(blocks).forEach((b, i) => tl.to(b, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, i * 0.15 + 0.1));
         
         ScrollTrigger.create({
           trigger: sections[4],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left center" : "top 80%",
+          start: !isMobile ? "left 90%" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
-          animation: tl,
-          onEnter: () => sections[4].classList.add("revealed")
+          animation: tl
         });
       }
 
@@ -399,17 +408,17 @@ export default function PortfolioPage() {
         gsap.set(contactIntroRef.current, { opacity: 0, x: -50 });
         gsap.set(contactFormRef.current, { opacity: 0, x: 50 });
         const tl = gsap.timeline();
-        tl.to(contactIntroRef.current, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, 0)
-          .to(contactFormRef.current, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, 0.3);
+        tl.to(sections[5], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+        tl.to(contactIntroRef.current, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, 0.1)
+          .to(contactFormRef.current, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, 0.4);
         
         ScrollTrigger.create({
           trigger: sections[5],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left center" : "top 80%",
+          start: !isMobile ? "left 90%" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
-          animation: tl,
-          onEnter: () => sections[5].classList.add("revealed")
+          animation: tl
         });
       }
 

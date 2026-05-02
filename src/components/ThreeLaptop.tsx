@@ -31,7 +31,7 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(35, w / h, 0.1, 100);
-    camera.position.set(0, 1.4, 8.0);
+    camera.position.set(0, 1.4, 8.5);
     camera.lookAt(0, 0.3, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -77,7 +77,7 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
     const keyMat = new THREE.MeshStandardMaterial({ color: 0x1a1b20, metalness: 0.4, roughness: 0.7 });
 
     const laptop = new THREE.Group();
-    laptop.scale.set(0.8, 0.8, 0.8);
+    laptop.scale.set(0.7, 0.7, 0.7);
     scene.add(laptop);
 
     // Base
@@ -193,7 +193,7 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
       laptop.position.x = slideX + mouseX * 0.15;
       laptop.position.y = 0.15 + float;
 
-      const camZ = 8.0 + internalP * 0.5;
+      const camZ = 8.5 + internalP * 0.5;
       camera.position.set(mouseX * 0.3, 1.4 + mouseY * -0.15, camZ);
       camera.lookAt(laptop.position.x * 0.4, 0.5, 0);
 
