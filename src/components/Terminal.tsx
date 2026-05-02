@@ -278,22 +278,23 @@ export default function Terminal({ floating, onReveal, onOpenColumn, closed, set
         ref={termRef}
         className={cn(
           "fixed flex flex-col z-50 transition-all shadow-[0_24px_80px_rgba(0,0,0,0.6)]",
-          "bg-[#110F1F]/95 backdrop-blur-[10px] border border-[#FF2AB8]",
+          "bg-[#110F1F]/95 backdrop-blur-[10px] border border-[#FF2AB8] shadow-[0_0_20px_rgba(255,42,184,0.15)]",
           "max-md:hidden",
           floating ? "rounded-none" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(880px,88vw)] h-[min(640px,80vh)] z-[100]"
         )}
         style={floating ? { top: pos.y, left: pos.x, width: size.w, height: size.h } : {}}
       >
-        <div className="bg-[#07060E] border-b border-[#26262c] p-2 flex items-center gap-2 cursor-grab active:cursor-grabbing select-none">
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF2AB8] cursor-pointer" onClick={() => setClosed(true)} />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]" />
+        <div className="bg-[#07060E] border-b border-[#26262c] p-2 flex items-center gap-2 cursor-grab active:cursor-grabbing select-none relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: 'repeating-linear-gradient(45deg, #FF2AB8 0 4px, transparent 4px 8px)'}} />
+          <div className="flex gap-1.5 relative z-10">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF2AB8] cursor-pointer shadow-[0_0_8px_#FF2AB8]" onClick={() => setClosed(true)} />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]/40" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]/40" />
           </div>
-          <div className="flex-1 text-center font-label text-[8px] text-[#9A86C2] tracking-wider uppercase">
+          <div className="flex-1 text-center font-label text-[8px] text-[#9A86C2] tracking-[0.15em] uppercase relative z-10">
             {D.user.handle}@{D.user.host} — alacritty
           </div>
-          <div className="border border-[#FF2AB8] text-[#FF2AB8] px-1.5 py-0.5 text-[7.5px] uppercase tracking-wider">newport</div>
+          <div className="border border-[#FF2AB8] text-[#FF2AB8] px-1.5 py-0.5 text-[7.5px] uppercase tracking-wider bg-[#FF2AB8]/5 relative z-10 shadow-[0_0_10px_rgba(255,42,184,0.2)]">newport</div>
           {floating && (
             <div className="flex gap-1 ml-auto">
               {Object.keys(SIZE_PRESETS).map((p) => (
