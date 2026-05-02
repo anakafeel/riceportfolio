@@ -323,7 +323,7 @@ export default function PortfolioPage() {
           ScrollTrigger.create({
             trigger: sections[1], // About column
             containerAnimation: horizTween,
-            start: "left 80%",
+            start: "left center",
             end: "right 20%",
             scrub: 0.5,
             animation: tl,
@@ -350,7 +350,7 @@ export default function PortfolioPage() {
         ScrollTrigger.create({
           trigger: sections[2],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left 80%" : "top 80%",
+          start: !isMobile ? "left center" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
           animation: tl,
@@ -368,7 +368,7 @@ export default function PortfolioPage() {
         ScrollTrigger.create({
           trigger: sections[3],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left 70%" : "top 80%",
+          start: !isMobile ? "left center" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
           animation: tl,
@@ -386,7 +386,7 @@ export default function PortfolioPage() {
         ScrollTrigger.create({
           trigger: sections[4],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left 70%" : "top 80%",
+          start: !isMobile ? "left center" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
           animation: tl,
@@ -405,7 +405,7 @@ export default function PortfolioPage() {
         ScrollTrigger.create({
           trigger: sections[5],
           containerAnimation: !isMobile ? horizTween : undefined,
-          start: !isMobile ? "left 70%" : "top 80%",
+          start: !isMobile ? "left center" : "top 80%",
           end: !isMobile ? "right center" : "bottom center",
           scrub: 1,
           animation: tl,
