@@ -551,44 +551,46 @@ export default function PortfolioPage() {
       )}
 
       {phase === "revealed" && (
-        <div className="strip-wrap" ref={wrapRef}>
-          <div className="strip" ref={stripRef}>
-            <section className="column" data-idx="0">
-              <span className="col-gutter">01 / home · ~/</span>
-              <span className="col-number">01</span>
-              <div className="col-title-eyebrow">portfolio · v0.4 · arcade</div>
-              <HomeColumn heroRef={heroRef} sideRef={sideRef} laptopCanvasRef={laptopCanvasRef} />
-            </section>
-            <section className="column" data-idx="1">
-              <span className="col-gutter">02 / about · ~/about.md</span>
-              <span className="col-number">02</span>
-              <div className="col-title-eyebrow">story · four beats</div>
-              <AboutColumn panelsRef={aboutPanelsRef} stepsRef={aboutStepsRef} />
-            </section>
-            <section className="column" data-idx="2">
-              <span className="col-gutter">03 / projects · ~/projects/</span>
-              <span className="col-number">03</span>
-              <div className="col-title-eyebrow">experiments · dotfiles</div>
-              <ProjectsColumn cardsRef={projCardsRef} focusCardIdx={focusCardIdx} onCardFocusChange={setFocusCardIdx} />
-            </section>
-            <section className="column" data-idx="3">
-              <span className="col-gutter">04 / blog · ~/blog/</span>
-              <span className="col-number">04</span>
-              <div className="col-title-eyebrow">field notes</div>
-              <BlogColumn rowsRef={blogRowsRef} />
-            </section>
-            <section className="column" data-idx="4">
-              <span className="col-gutter">05 / rice · ~/rice/</span>
-              <span className="col-number">05</span>
-              <div className="col-title-eyebrow">screenshots · 2026</div>
-              <RiceColumn blocksRef={riceBlocksRef} />
-            </section>
-            <section className="column" data-idx="5">
-              <span className="col-gutter">06 / contact · /dev/contact</span>
-              <span className="col-number">06</span>
-              <div className="col-title-eyebrow">listening</div>
-              <ContactColumn introRef={contactIntroRef} formRef={contactFormRef} />
-            </section>
+        <div className="gsap-container">
+          <div className="strip-wrap" ref={wrapRef}>
+            <div className="strip" ref={stripRef}>
+              <section className="column" data-idx="0">
+                <span className="col-gutter">01 / home · ~/</span>
+                <span className="col-number">01</span>
+                <div className="col-title-eyebrow">portfolio · v0.4 · arcade</div>
+                <HomeColumn heroRef={heroRef} sideRef={sideRef} laptopCanvasRef={laptopCanvasRef} />
+              </section>
+              <section className="column" data-idx="1">
+                <span className="col-gutter">02 / about · ~/about.md</span>
+                <span className="col-number">02</span>
+                <div className="col-title-eyebrow">story · four beats</div>
+                <AboutColumn panelsRef={aboutPanelsRef} stepsRef={aboutStepsRef} />
+              </section>
+              <section className="column" data-idx="2">
+                <span className="col-gutter">03 / projects · ~/projects/</span>
+                <span className="col-number">03</span>
+                <div className="col-title-eyebrow">experiments · dotfiles</div>
+                <ProjectsColumn cardsRef={projCardsRef} focusCardIdx={focusCardIdx} onCardFocusChange={setFocusCardIdx} />
+              </section>
+              <section className="column" data-idx="3">
+                <span className="col-gutter">04 / blog · ~/blog/</span>
+                <span className="col-number">04</span>
+                <div className="col-title-eyebrow">field notes</div>
+                <BlogColumn rowsRef={blogRowsRef} />
+              </section>
+              <section className="column" data-idx="4">
+                <span className="col-gutter">05 / rice · ~/rice/</span>
+                <span className="col-number">05</span>
+                <div className="col-title-eyebrow">screenshots · 2026</div>
+                <RiceColumn blocksRef={riceBlocksRef} />
+              </section>
+              <section className="column" data-idx="5">
+                <span className="col-gutter">06 / contact · /dev/contact</span>
+                <span className="col-number">06</span>
+                <div className="col-title-eyebrow">listening</div>
+                <ContactColumn introRef={contactIntroRef} formRef={contactFormRef} />
+              </section>
+            </div>
           </div>
         </div>
       )}
