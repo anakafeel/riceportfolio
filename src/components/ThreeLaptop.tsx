@@ -111,7 +111,6 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
     // Interactive state
     const OPEN_ROT = -0.22;
     const CLOSED_ROT = -Math.PI / 2 - 0.1;
-    let currentLidRot = OPEN_ROT;
 
     // Raycasting
     const raycaster = new THREE.Raycaster();

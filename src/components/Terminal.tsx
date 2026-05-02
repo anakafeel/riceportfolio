@@ -34,15 +34,19 @@ const DOCK_POSITIONS = {
 };
 
 function useUptime(start: number) {
-  const [, force] = useState(0);
+  const [uptime, setUptime] = useState("");
   useEffect(() => {
-    const id = setInterval(() => force((x) => x + 1), 30000);
+    const calc = () => {
+      const ms = Date.now() - start;
+      const h = Math.floor(ms / 3600000);
+      const m = Math.floor((ms % 3600000) / 60000);
+      setUptime(`${h}h ${m}m`);
+    };
+    calc();
+    const id = setInterval(calc, 30000);
     return () => clearInterval(id);
-  }, []);
-  const ms = Date.now() - start;
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor((ms % 3600000) / 60000);
-  return `${h}h ${m}m`;
+  }, [start]);
+  return uptime;
 }
 
 interface TerminalProps {

@@ -639,7 +639,7 @@ export default function PortfolioPage() {
 
       {phase === "boot" && <BootSequence onDone={() => setPhase("terminal")} />}
 
-      {/* ── Keybind Overlay (?  key) ───────────────────────────── */}
+      {/* ── Keybind Overlay (? key) ───────────────────────────── */}
       <KeybindOverlay open={keybindOpen} onClose={() => setKeybindOpen(false)} />
 
       {/* ── Project Fullscreen Overlay (F key) ────────────────── */}
