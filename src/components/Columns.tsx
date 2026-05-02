@@ -12,13 +12,13 @@ export function HomeColumn({ heroRef, sideRef, laptopCanvasRef }: { heroRef: Rea
       <div className="flex-1 will-change-transform transform-gpu z-10 max-w-2xl" ref={heroRef}>
         <div className="font-label text-[9px] text-[#FF2AB8] tracking-[0.12em] mb-5 flex gap-2.5 items-center">
           <span>● available · 2026 Q2</span>
-          <span className="text-[#5e5e68]">— remote / warsaw · GMT+1</span>
+          <span className="text-[var(--text-secondary)]">— remote / warsaw · GMT+1</span>
         </div>
-        <h1 className="text-[clamp(36px,6vw,96px)] leading-[1.05] tracking-normal text-[#F2F0FF] [text-shadow:4px_4px_0_#FF2AB8] mb-2">
+        <h1 className="text-[clamp(36px,6vw,96px)] leading-[1.05] tracking-normal text-[var(--text-primary)] [text-shadow:4px_4px_0_#FF2AB8] mb-2">
           saim<br/>
           <em className="font-italic text-[0.85em] text-[#FF2AB8] [text-shadow:0_0_22px_rgba(255,42,184,0.55)]">hashmi</em><span className="inline-block w-[0.35em] h-[0.35em] rounded-full bg-[#FF2AB8] shadow-[0_0_24px_#FF2AB8] ml-[0.05em] align-baseline" />
         </h1>
-        <div className="font-mono text-[22px] text-[#d8d8dd] max-w-[560px] mt-7">
+        <div className="font-mono text-[22px] text-[var(--text-secondary)] max-w-[560px] mt-7">
           <span className="inline-block px-2.5 py-1 border border-[#FF2AB8] text-[#FF2AB8] font-label text-[8px] tracking-[0.1em] uppercase rounded-none mr-2 align-middle relative overflow-hidden group">
             <span className="relative z-10">creative</span>
             <div className="absolute inset-0 bg-[#FF2AB8] scale-y-0 origin-bottom transition-transform duration-300 group-hover:scale-y-100 -z-0" />
@@ -78,15 +78,15 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
   return (
     <div className="flex flex-col items-center justify-center flex-1 max-w-4xl mx-auto">
       <div className="w-full">
-        <div className="bg-[#110F1F] border border-[#FF2AB8] p-3.5 shadow-[6px_6px_0_oklch(0.28_0.04_305)] mb-12">
+        <div className="bg-[var(--bg-surface)] border border-[#FF2AB8] p-3.5 shadow-[6px_6px_0_oklch(0.28_0.04_305)] mb-12">
           <div className="flex gap-2 items-center mb-2.5 text-[#FF2AB8]">
             <span className="font-label text-[8px] tracking-wider">/ profile</span>
             <span className="w-1.5 h-1.5 bg-[#FF2AB8] shadow-[0_0_8px_#FF2AB8]" />
-            <span className="font-label text-[8px] text-[#9A86C2]">online</span>
+            <span className="font-label text-[8px] text-[var(--text-secondary)]">online</span>
           </div>
           <div className="grid grid-cols-[110px_1fr] gap-3.5">
             <div 
-              className="h-[130px] border border-[#26262c] relative overflow-hidden bg-[#07060E] cursor-pointer group/photo rounded-[4px]"
+              className="h-[130px] border border-[var(--border)] relative overflow-hidden bg-[var(--bg)] cursor-pointer group/photo rounded-[4px]"
               onClick={() => setLightboxOpen(true)}
             >
               <img 
@@ -95,7 +95,7 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
                 alt="Saim Hashmi" 
               />
               <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage: 'repeating-linear-gradient(45deg, #FF2AB8 0 6px, transparent 6px 12px)'}} />
-              <div className="absolute top-2 left-2 border border-[#FF2AB8] bg-[#07060E] text-[#FF2AB8] font-label text-[8px] px-1 py-0.5 z-10">[ zoom ]</div>
+              <div className="absolute top-2 left-2 border border-[#FF2AB8] bg-[var(--bg)] text-[#FF2AB8] font-label text-[8px] px-1 py-0.5 z-10">[ zoom ]</div>
               <div className="ps-shimmer" />
             </div>
             {lightboxOpen && (
@@ -110,22 +110,22 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
               </div>
             )}
             <div>
-              <div className="font-display text-[13px] text-[#F2F0FF] mb-1.5 uppercase">saim hashmi</div>
+              <div className="font-display text-[13px] text-[var(--text-primary)] mb-1.5 uppercase">saim hashmi</div>
               <div className="font-mono text-[18px] text-[#FF2AB8] mb-2 uppercase">creative technologist · niri ricer</div>
               <div className="grid grid-cols-2 gap-x-3.5 gap-y-1 font-mono text-[16px]">
-                <div><span className="text-[#9A86C2] mr-1.5 uppercase">host</span><span className="text-[#F2F0FF]">niriarch</span></div>
-                <div><span className="text-[#9A86C2] mr-1.5 uppercase">tz</span><span className="text-[#F2F0FF]">GMT+1</span></div>
-                <div><span className="text-[#9A86C2] mr-1.5 uppercase">uptime</span><span className="text-[#F2F0FF]">47d 12h</span></div>
+                <div><span className="text-[var(--text-secondary)] mr-1.5 uppercase">host</span><span className="text-[var(--text-primary)]">niriarch</span></div>
+                <div><span className="text-[var(--text-secondary)] mr-1.5 uppercase">tz</span><span className="text-[var(--text-primary)]">GMT+1</span></div>
+                <div><span className="text-[var(--text-secondary)] mr-1.5 uppercase">uptime</span><span className="text-[var(--text-primary)]">47d 12h</span></div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mb-8">
-          <h2 className="text-[clamp(24px,3.4vw,48px)] leading-[1.2] text-[#F2F0FF] mb-6 tracking-normal">
+          <h2 className="text-[clamp(24px,3.4vw,48px)] leading-[1.2] text-[var(--text-primary)] mb-6 tracking-normal">
             a portfolio is a <em className="font-italic text-[#FF2AB8]">rice</em>.
           </h2>
-          <p className="text-[21px] text-[#F2F0FF] font-mono">
+          <p className="text-[21px] text-[var(--text-primary)] font-mono">
             I treat the browser like a Wayland compositor. This site is a four-beat
             story — scroll right to pull each panel forward.
           </p>
@@ -133,15 +133,15 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
 
         <div className="relative h-[440px]" ref={panelsRef}>
           {beats.map((b, i) => (
-            <div className="about-panel absolute inset-0 p-[30px_34px] bg-[#110F1F] border border-[#26262c] flex flex-col gap-3.5 shadow-[6px_6px_0_#FF2AB8,0_16px_40px_rgba(0,0,0,0.55)] will-change-transform" key={i}>
+            <div className="about-panel absolute inset-0 p-[30px_34px] bg-[var(--bg-surface)] border border-[var(--border)] flex flex-col gap-3.5 shadow-[6px_6px_0_#FF2AB8,0_16px_40px_rgba(0,0,0,0.55)] will-change-transform" key={i}>
               <div className="font-label text-[9px] text-[#FF2AB8] uppercase tracking-wider">{b.idx}</div>
-              <h3 className="text-[20px] text-[#F2F0FF] leading-[1.3] uppercase">{b.title}</h3>
-              <p className="text-[20px] text-[#F2F0FF] font-mono leading-[1.4]">{b.body}</p>
-              <div className="font-label text-[8px] text-[#9A86C2] tracking-[0.12em] mt-auto uppercase">{b.tag}</div>
+              <h3 className="text-[20px] text-[var(--text-primary)] leading-[1.3] uppercase">{b.title}</h3>
+              <p className="text-[20px] text-[var(--text-primary)] font-mono leading-[1.4]">{b.body}</p>
+              <div className="font-label text-[8px] text-[var(--text-secondary)] tracking-[0.12em] mt-auto uppercase">{b.tag}</div>
             </div>
           ))}
           <div className="absolute -right-12 top-1/2 -translate-y-1/2 flex flex-col gap-2.5" ref={stepsRef}>
-            {beats.map((_, i) => <div className="w-[3px] h-[26px] bg-[#26262c] transition-all duration-300" key={i} />)}
+            {beats.map((_, i) => <div className="w-[3px] h-[26px] bg-[var(--border)] transition-all duration-300" key={i} />)}
           </div>
         </div>
       </div>
