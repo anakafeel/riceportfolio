@@ -34,12 +34,30 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
     camera.position.set(0, 1.4, 8.5);
     camera.lookAt(0, 0.3, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
+    // Use a throwaway canvas for the capability check so the render canvas
+    // stays context-free and Three.js can request WebGL2 without a conflict.
+    const testCanvas = document.createElement("canvas");
+    const glTest =
+      testCanvas.getContext("webgl2") ||
+      testCanvas.getContext("webgl") ||
+      testCanvas.getContext("experimental-webgl");
+    if (!glTest) {
+      console.warn("WebGL is not supported in this browser. ThreeLaptop will not render.");
+      return;
+    }
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: "high-performance",
+      });
+    } catch (err) {
+      console.warn("WebGL initialization failed, falling back to empty canvas.", err);
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(w, h, false);
     renderer.setClearColor(0x000000, 0);
@@ -152,13 +170,14 @@ const ThreeLaptop = forwardRef<ThreeLaptopApi>((_, ref) => {
     const ro = new ResizeObserver(onResize);
     ro.observe(canvas);
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
     let lidProgress = 1.0;
     let internalP = 0;
 
     function loop() {
       if (!running) return;
-      const dt = clock.getDelta();
+      timer.update();
+      const dt = timer.getDelta();
       internalP += (apiRef.current.targetP - internalP) * 0.1;
       
       const targetLid = apiRef.current.isClosed ? 0 : 1;

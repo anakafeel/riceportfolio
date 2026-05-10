@@ -286,10 +286,20 @@ export default function Terminal({ floating, onReveal, onOpenColumn, closed, set
       >
         <div className="bg-[#07060E] border-b border-[#26262c] p-2 flex items-center gap-2 cursor-grab active:cursor-grabbing select-none relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: 'repeating-linear-gradient(45deg, #FF2AB8 0 4px, transparent 4px 8px)'}} />
-          <div className="flex gap-1.5 relative z-10">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF2AB8] cursor-pointer shadow-[0_0_8px_#FF2AB8]" onClick={() => setClosed(true)} />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]/40" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#9A86C2]/40" />
+          <div className="flex gap-2 relative z-10 items-center">
+            <span
+              className="w-4 h-4 rounded-full bg-[#FF5F57] cursor-pointer shadow-[0_0_8px_rgba(255,95,87,0.7)] hover:brightness-110 active:brightness-75 transition-all"
+              title="close"
+              onClick={() => setClosed(true)}
+            />
+            <span
+              className="w-4 h-4 rounded-full bg-[#FEBC2E] shadow-[0_0_6px_rgba(254,188,46,0.5)] cursor-default"
+              title="minimize"
+            />
+            <span
+              className="w-4 h-4 rounded-full bg-[#28C840] shadow-[0_0_6px_rgba(40,200,64,0.5)] cursor-default"
+              title="maximize"
+            />
           </div>
           <div className="flex-1 text-center font-label text-[8px] text-[#9A86C2] tracking-[0.15em] uppercase relative z-10">
             {D.user.handle}@{D.user.host} — alacritty

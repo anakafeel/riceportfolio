@@ -66,7 +66,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`
+    <html lang="en" suppressHydrationWarning className={`
       ${pressStart2P.variable} 
       ${vt323.variable} 
       ${ebGaramond.variable} 

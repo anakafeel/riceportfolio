@@ -14,11 +14,16 @@ export function HomeColumn({ heroRef, sideRef, laptopCanvasRef }: { heroRef: Rea
           <span>● available · 2026 Q2</span>
           <span className="text-[var(--text-secondary)]">— remote / warsaw · GMT+1</span>
         </div>
-        <h1 className="text-[clamp(36px,6vw,96px)] leading-[1.05] tracking-normal text-[var(--text-primary)] [text-shadow:4px_4px_0_#FF2AB8] mb-2">
-          saim<br/>
-          <em className="font-italic text-[0.85em] text-[#FF2AB8] [text-shadow:0_0_22px_rgba(255,42,184,0.55)]">hashmi</em><span className="inline-block w-[0.35em] h-[0.35em] rounded-full bg-[#FF2AB8] shadow-[0_0_24px_#FF2AB8] ml-[0.05em] align-baseline" />
+        <h1 className="leading-[1.1] mb-2">
+          <span className="font-display name-glitch block text-[clamp(24px,6vw,52px)] tracking-tight text-[var(--text-primary)] uppercase">
+            saim
+          </span>
+          <span className="block">
+            <em className="font-italic text-[clamp(32px,5.5vw,88px)] text-[#FF2AB8] [text-shadow:0_0_22px_rgba(255,42,184,0.55)]">hashmi</em>
+            <span className="pixel-cursor" />
+          </span>
         </h1>
-        <div className="font-mono text-[22px] text-[var(--text-secondary)] max-w-[560px] mt-7">
+        <div className="font-mono text-[16px] sm:text-[22px] text-[var(--text-secondary)] max-w-[560px] mt-5 sm:mt-7">
           <span className="inline-block px-2.5 py-1 border border-[#FF2AB8] text-[#FF2AB8] font-label text-[8px] tracking-[0.1em] uppercase rounded-none mr-2 align-middle relative overflow-hidden group">
             <span className="relative z-10">creative</span>
             <div className="absolute inset-0 bg-[#FF2AB8] scale-y-0 origin-bottom transition-transform duration-300 group-hover:scale-y-100 -z-0" />
@@ -31,24 +36,9 @@ export function HomeColumn({ heroRef, sideRef, laptopCanvasRef }: { heroRef: Rea
           agentic workflows, and high-fidelity terminals. currently on {U.location}.
         </div>
       </div>
-      <div className="flex-1 w-full h-[300px] sm:h-full min-h-[300px] sm:min-h-[420px] relative grid place-items-center will-change-transform transform-gpu pointer-events-none" ref={sideRef}>
-        <div className="hidden sm:block w-full h-full">
+      <div className="flex-1 w-full h-[280px] sm:h-full min-h-[280px] sm:min-h-[420px] relative grid place-items-center will-change-transform transform-gpu pointer-events-none" ref={sideRef}>
+        <div className="w-full h-full">
           <ThreeLaptop ref={laptopCanvasRef} />
-        </div>
-        <div className="sm:hidden w-[280px] h-[180px] bg-[#110F1F] border border-[#26262c] p-4 flex flex-col gap-2 font-mono text-[10px] text-[#9A86C2] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-          <div className="flex gap-1.5 mb-1">
-            <div className="w-2 h-2 rounded-full bg-[#FF2AB8]" />
-            <div className="w-2 h-2 rounded-full bg-[#26262c]" />
-            <div className="w-2 h-2 rounded-full bg-[#26262c]" />
-          </div>
-          <div>$ neofetch</div>
-          <div className="text-[#F2F0FF]">saim@niriarch</div>
-          <div className="text-[#5e5e68]">----------</div>
-          <div>OS: Fedora 42</div>
-          <div>Host: Mobile Handheld</div>
-          <div>Kernel: 6.13.8</div>
-          <div>WM: niri</div>
-          <div className="mt-auto text-[#FF2AB8] opacity-50 animate-pulse">_</div>
         </div>
         <div className="absolute bottom-1.5 left-0 right-0 flex gap-[18px] justify-center font-mono text-[16px] text-[#9A86C2]">
           <span>$ systemctl status lid</span>
@@ -131,7 +121,7 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
           </p>
         </div>
 
-        <div className="relative h-[440px]" ref={panelsRef}>
+        <div className="relative h-[300px] sm:h-[440px]" ref={panelsRef}>
           {beats.map((b, i) => (
             <div className="about-panel absolute inset-0 p-[30px_34px] bg-[var(--bg-surface)] border border-[var(--border)] flex flex-col gap-3.5 shadow-[6px_6px_0_#FF2AB8,0_16px_40px_rgba(0,0,0,0.55)] will-change-transform" key={i}>
               <div className="font-label text-[9px] text-[#FF2AB8] uppercase tracking-wider">{b.idx}</div>
@@ -140,7 +130,7 @@ export function AboutColumn({ panelsRef, stepsRef }: { panelsRef: React.RefObjec
               <div className="font-label text-[8px] text-[var(--text-secondary)] tracking-[0.12em] mt-auto uppercase">{b.tag}</div>
             </div>
           ))}
-          <div className="absolute -right-12 top-1/2 -translate-y-1/2 flex flex-col gap-2.5" ref={stepsRef}>
+          <div className="hidden sm:flex absolute -right-12 top-1/2 -translate-y-1/2 flex-col gap-2.5" ref={stepsRef}>
             {beats.map((_, i) => <div className="w-[3px] h-[26px] bg-[var(--border)] transition-all duration-300" key={i} />)}
           </div>
         </div>
@@ -160,7 +150,7 @@ export function ProjectsColumn({ cardsRef, focusCardIdx, onCardFocusChange }: { 
           {PORTFOLIO_DATA.projects.length} · dotfile repos · <span className="text-[#FF2AB8]">F</span> fullscreen · grid ▦
         </div>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-[18px] flex-1 transform-style-3d" ref={cardsRef}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px] flex-1 transform-style-3d" ref={cardsRef}>
         {PORTFOLIO_DATA.projects.map((p, i) => (
           <Link
             key={p.slug}
@@ -197,26 +187,30 @@ export function ProjectsColumn({ cardsRef, focusCardIdx, onCardFocusChange }: { 
 
 export function BlogColumn({ rowsRef }: { rowsRef: React.RefObject<HTMLDivElement | null> }) {
   return (
-    <div className="grid lg:grid-cols-[0.7fr_1.3fr] gap-20 items-center flex-1">
-      <div>
-        <h2 className="text-[clamp(28px,4vw,56px)] text-[#F2F0FF] tracking-normal mb-6">
+    <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:items-center flex-1">
+      <div className="shrink-0">
+        <h2 className="text-[clamp(26px,4vw,56px)] text-[#F2F0FF] tracking-normal mb-4 lg:mb-6">
           field <em className="font-italic text-[#FF2AB8]">notes</em>
         </h2>
-        <p className="font-mono text-[20px] text-[#F2F0FF]/90 mb-8 max-w-[340px]">Essays on tiling compositors, agentic development, and the aesthetic of terminals. Updated when something worth saying lands.</p>
-        <Link className="blog-cmd-link inline-flex gap-2 items-baseline font-mono text-[18px] text-[#FF2AB8] tracking-tight group hover:underline underline-offset-4 decoration-[#FF2AB8] hover:[text-shadow:0_0_10px_rgba(0,255,204,0.4)] transition-all" href="/blog">
+        <p className="font-mono text-[17px] lg:text-[20px] text-[#F2F0FF]/90 mb-6 lg:mb-8 max-w-[340px]">Essays on tiling compositors, agentic development, and the aesthetic of terminals. Updated when something worth saying lands.</p>
+        <Link className="blog-cmd-link inline-flex gap-2 items-baseline font-mono text-[17px] text-[#FF2AB8] tracking-tight group hover:underline underline-offset-4 decoration-[#FF2AB8] hover:[text-shadow:0_0_10px_rgba(0,255,204,0.4)] transition-all" href="/blog">
           <span className="text-[#9A86C2] font-medium">$</span> open <span className="text-[#F2F0FF] opacity-85">blog --all</span>
         </Link>
       </div>
       <div className="flex flex-col" ref={rowsRef}>
         {PORTFOLIO_DATA.blog.map((b) => (
-          <Link className="grid grid-cols-[110px_1fr_auto] gap-7 items-baseline p-[22px_0] border-t border-[#26262c] last:border-b will-change-transform relative group hover:pl-[22px] transition-all duration-300" key={b.slug} href={`/blog/${b.slug}`}>
+          <Link
+            className="flex flex-col sm:grid sm:grid-cols-[110px_1fr_auto] gap-1 sm:gap-7 items-start sm:items-baseline py-4 sm:p-[22px_0] border-t border-[#26262c] last:border-b will-change-transform relative group hover:pl-4 sm:hover:pl-[22px] transition-all duration-300"
+            key={b.slug}
+            href={`/blog/${b.slug}`}
+          >
             <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#FF2AB8] scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300" />
-            <div className="font-label text-[9px] text-[#9A86C2] tracking-wider uppercase">{b.date}</div>
+            <div className="font-label text-[9px] text-[#9A86C2] tracking-wider uppercase shrink-0">{b.date}</div>
             <div>
-              <div className="font-italic italic text-[30px] text-[#F2F0FF] group-hover:text-[#FF2AB8] transition-colors leading-[1.15]">{b.title}</div>
-              <div className="font-mono text-[18px] text-[#F2F0FF]/90 mt-1 max-w-[620px]">{b.excerpt}</div>
+              <div className="font-italic italic text-[22px] sm:text-[30px] text-[#F2F0FF] group-hover:text-[#FF2AB8] transition-colors leading-[1.2]">{b.title}</div>
+              <div className="font-mono text-[15px] sm:text-[18px] text-[#F2F0FF]/90 mt-1 max-w-[620px]">{b.excerpt}</div>
             </div>
-            <div className="font-label text-[14px] text-[#FF2AB8]">→</div>
+            <div className="font-label text-[14px] text-[#FF2AB8] self-start sm:self-auto mt-1 sm:mt-0">→</div>
           </Link>
         ))}
       </div>
@@ -241,7 +235,7 @@ export function RiceColumn({ blocksRef }: { blocksRef: React.RefObject<HTMLDivEl
         </h2>
         <div className="font-label text-[9px] text-[#9A86C2] uppercase">/ screenshots · 06 · oklch-tuned</div>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-3.5 perspective-[1200px]" ref={blocksRef}>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 perspective-[1200px]" ref={blocksRef}>
         {PORTFOLIO_DATA.rice.map((s) => (
           <div key={s.id} className="relative aspect-[16/10] border border-[#FF2AB8] bg-[#110F1F] overflow-hidden cursor-pointer transition-all duration-500 transform-gpu group hover:scale-[1.04] hover:border-[#FF2AB8] hover:shadow-[0_0_32px_rgba(255,42,184,0.4),inset_0_0_0_1px_#FF2AB8] hover:z-10" data-rice-id={s.id}>
             <img src={s.url} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500" alt={s.label} />
@@ -266,7 +260,7 @@ export function RiceColumn({ blocksRef }: { blocksRef: React.RefObject<HTMLDivEl
 export function ContactColumn({ introRef, formRef }: { introRef: React.RefObject<HTMLDivElement | null>; formRef: React.RefObject<HTMLFormElement | null> }) {
   const [sent, setSent] = useState(false);
   return (
-    <div className="grid lg:grid-cols-2 gap-20 items-center flex-1">
+    <div className="flex flex-col gap-10 lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center flex-1">
       <div ref={introRef}>
         <h2 className="text-[clamp(28px,4vw,64px)] text-[#F2F0FF] tracking-normal mb-6">
           let&apos;s <em className="font-italic text-[#FF2AB8]">talk</em>.

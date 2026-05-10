@@ -214,15 +214,19 @@ export default function PortfolioPage() {
   const jumpToIdx = useCallback((idx: number) => {
     if (idx < 0 || idx >= COLUMNS_DEF.length) return;
     setPhase("revealed");
-    
-    // Use a small delay to ensure the DOM is rendered if we were in terminal phase
+
     setTimeout(() => {
+      if (window.innerWidth <= 768) {
+        const cols = document.querySelectorAll<HTMLElement>(".column");
+        cols[idx]?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
       const pinST = ScrollTrigger.getAll().find(st => st.pin && st.trigger === wrapRef.current);
       if (!pinST) return;
-      
+
       const targetProgress = idx / (COLUMNS_DEF.length - 1);
       const scrollY = pinST.start + (pinST.end - pinST.start) * targetProgress;
-      
       window.scrollTo({ top: scrollY, behavior: "smooth" });
     }, 100);
   }, []);
@@ -242,37 +246,17 @@ export default function PortfolioPage() {
       const isMobile = window.innerWidth <= 768;
 
       if (isMobile) {
-        // Mobile: Vertical reveal
-        sections.forEach((section, i) => {
-          if (i === 0) return; // Home always visible
-          gsap.fromTo(section, { opacity: 0, y: 30 }, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 85%",
-              toggleActions: "play none none none",
-              once: true
-            }
-          });
+        // Columns are always visible on mobile via CSS (opacity: 1 !important).
+        // Track which section is active for topbar nav state.
+        ScrollTrigger.create({
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (self) => {
+            const idx = Math.round(self.progress * (total - 1));
+            setActiveCol(idx);
+          },
         });
-
-        // Simple progress bar update based on vertical scroll
-        gsap.to(fillRef.current, {
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-            onUpdate: (self) => {
-              const idx = Math.round(self.progress * (total - 1));
-              setActiveCol(idx);
-            }
-          }
-        });
-
         return;
       }
 
@@ -511,7 +495,7 @@ export default function PortfolioPage() {
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [phase, activeCol, focusCardIdx, fullscreenIdx, keybindOpen, jumpToIdx]);
+  }, [phase, activeCol, focusCardIdx, fullscreenIdx, keybindOpen, jumpToIdx, toggleTheme]);
 
   return (
     <>
@@ -528,7 +512,7 @@ export default function PortfolioPage() {
       </div>
 
       {phase !== "boot" && (
-        <div className="fixed top-0 left-0 right-0 h-9 z-40 flex items-center gap-3.5 px-4.5 bg-[#07060E]/92 backdrop-blur-[10px] border-b border-[#FF2AB8] font-label text-[9px] text-[#9A86C2] uppercase">
+        <div className="site-topbar fixed top-0 left-0 right-0 h-9 z-40 flex items-center gap-3.5 px-4.5 bg-[#07060E]/92 backdrop-blur-[10px] border-b border-[#FF2AB8] font-label text-[9px] text-[#9A86C2] uppercase">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF2AB8] shadow-[0_0_10px_#FF2AB8] shrink-0" />
           <span className="text-[#9A86C2] shrink-0">niri</span>
           <span className="text-[#5e5e68] shrink-0 hidden sm:inline">0.1.10</span>
@@ -606,7 +590,7 @@ export default function PortfolioPage() {
       )}
 
       {phase === "revealed" && (
-        <div className="scroll-rail">
+        <div className="scroll-rail site-scrollrail">
           <span>scroll</span>
           <div className="w-[220px] h-1 bg-[#07060E] border border-[#26262c] relative overflow-hidden mx-3.5">
             <div className="absolute left-0 top-0 bottom-0 bg-[#FF2AB8] shadow-[0_0_12px_#FF2AB8] transition-all" ref={fillRef} />
@@ -635,24 +619,57 @@ export default function PortfolioPage() {
       )}
 
       {phase !== "boot" && (
-        <div className="fixed bottom-3.5 left-5 z-30 font-mono text-[16px] text-[#9A86C2] flex gap-3.5 items-center p-[6px_12px] bg-[#07060E]/70 border border-[#26262c] backdrop-blur-[8px]">
+        <div className="site-keybindbar fixed bottom-3.5 left-5 z-30 font-mono text-[16px] text-[#9A86C2] flex gap-3.5 items-center p-[6px_12px] bg-[#07060E]/70 border border-[#26262c] backdrop-blur-[8px]">
           {phase === "terminal" ? (
             <>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">Ctrl</kbd>+<kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">`</kbd> reveal</span>
-              <span className="text-[#26262c]">│</span>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">?</kbd> keybinds</span>
-              <span className="text-[#26262c]">│</span>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">help</kbd></span>
+              <span
+                className="flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => setPhase("revealed")}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">Ctrl</kbd>+<kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">`</kbd> reveal
+              </span>
+              <span className="sep text-[#26262c]">│</span>
+              <span
+                className="flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => setKeybindOpen(true)}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">?</kbd> keybinds
+              </span>
             </>
           ) : (
             <>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">↓</kbd> scroll</span>
-              <span className="text-[#26262c]">│</span>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">→</kbd>/<kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">L</kbd> next</span>
-              <span className="text-[#26262c]">│</span>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">~</kbd> boot</span>
-              <span className="text-[#26262c]">│</span>
-              <span className="flex gap-1.5 items-center"><kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">?</kbd> keys</span>
+              <span
+                className="flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => window.scrollBy({ top: 200, behavior: "smooth" })}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">↓</kbd> scroll
+              </span>
+              <span className="sep text-[#26262c]">│</span>
+              <span
+                className="flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => jumpToIdx(Math.min(COLUMNS_DEF.length - 1, activeCol + 1))}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">→</kbd>/<kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">L</kbd> next
+              </span>
+              <span className="sep text-[#26262c] hidden sm:inline">│</span>
+              <span
+                className="hidden sm:flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => {
+                  gsap.to(".column", {
+                    x: 100, opacity: 0, duration: 0.5, ease: "expo.in",
+                    onComplete: () => { setPhase("terminal"); localStorage.removeItem("sr:phase"); }
+                  });
+                }}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">~</kbd> boot
+              </span>
+              <span className="sep text-[#26262c]">│</span>
+              <span
+                className="flex gap-1.5 items-center cursor-pointer hover:text-[#F2F0FF] transition-colors"
+                onClick={() => setKeybindOpen(true)}
+              >
+                <kbd className="font-label text-[8px] bg-[#07060E] border border-[#FF2AB8] text-[#FF2AB8] p-[2px_6px]">?</kbd> keys
+              </span>
             </>
           )}
         </div>
